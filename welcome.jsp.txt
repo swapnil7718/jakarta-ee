@@ -1,0 +1,77 @@
+welcome.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Welcome Page</title>
+</head>
+<body>
+	<h2>Welcome to the Application!!!</h2>
+</body>
+</html>
+_____________________________________________________
+
+index.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="MainServ" method="post">
+
+Username :<input type ="text" id="username" name="username" required><br>
+
+
+Password :<input type = "password" id = "password" name = "password" required><br>
+
+
+<input type = "submit" value="      login      ">
+</form>
+</body>
+</html>
+_____________________________________________________
+
+MainServ.java
+
+
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/*"MainServ" will check if user name and password is 
+ * "scott" and "tiger" respectively , it will forward
+ *  to "Welcome.jsp" which will display welcome message.
+if user name and password is not correct, "MainServ" 
+will forward to "index.jsp".
+ */
+public class MainServ extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+	
+	if("scott".equals(username) && "tiger".equals(password))
+	{
+	request.getRequestDispatcher("welcome.jsp").forward(request, response);
+	}
+	else
+	{
+		request.getRequestDispatcher("index.jsp").forward(request, response);
+	}
+	}
+}
+
+
